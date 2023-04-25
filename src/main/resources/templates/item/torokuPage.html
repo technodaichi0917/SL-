@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- link要素がないため、空のフラグメント式 ~{} を記述 -->
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{}, ~{::body/content()})}">
+<head>
+    <!-- 修正しているページのタイトル -->
+    <title>商品新規登録ページ or 商品編集ページ</title>
+</head>
+<body>
+    <h1>商品新規登録ページ</h1>
+    <!-- 登録処理のHTTPメソッドはPOSTにします -->
+    <form th:action="@{/item/toroku}" th:object="${itemForm}" method="post">
+        <div>
+            <label>商品名</label>
+        </div>
+        <div>
+            <input type="text" th:field="*{name}" placeholder="商品名を入力してください">
+        </div>
+        <div>
+            <label>価格</label>
+        </div>
+        <div>
+            <input type="number" th:field="*{price}" placeholder="価格を入力してください">
+        </div>
+        <div>
+            <label>カテゴリ名</label>
+        </div>
+        <div>
+            <select th:field="*{categoryId}">
+                <!-- カテゴリ一覧から選択できるようする -->
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" name="send" value="登録する">
+        </div>
+        <div>
+            <!-- 一覧に戻る -->
+            <a href="/item">戻る</a>
+        </div>
+    </form>
+</body>
+</html>

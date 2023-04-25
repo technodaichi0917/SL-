@@ -1,0 +1,39 @@
+/* 一覧ページ用の色を定義します */
+:root {
+    --thead-color: #08FFC8;
+}
+
+/* コンテンツ内の見出しを調整する */
+.contents h1 {
+    margin: 30px 50px;
+}
+
+/* テーブル全体の設定をします */
+.tbl {
+    margin: 0 auto;
+    width: 85%;
+    background-color: white;
+    border-spacing: 0;
+}
+
+/* テーブルヘッダーの色を指定します */
+.tbl thead {
+    background-color: var(--thead-color);
+}
+
+/* tbl-xxごとに横幅を指定し、テーブル全体のバランスを整えます */
+.tbl-form {
+    width: 50%;
+}
+
+.tbl-stock-btn {
+    width: 20%;
+}
+
+.tbl-stock {
+    width: 30%;
+}
+
+.tbl-btn {
+    width: 100%;
+}

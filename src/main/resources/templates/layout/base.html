@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!-- フラグメントの定義 -->
+<html xmlns:th="http://www.thymeleaf.org"
+    th:fragment="layout(title, link, contents)">
+<!-- headタグの中身を共通化 -->
+<head>
+<meta charset="UTF-8">
+<!-- 各画面のタイトル -->
+<title th:replace="${title}">共通部品</title>
+<!-- どの画面でも必ず読み込むCSSファイル -->
+<link rel="stylesheet" href="/css/default.css">
+<!-- 各画面で固有に読み込むCSSファイル -->
+<link th:replace="${link}">
+</head>
+<body>
+    <header th:replace="~{layout/header :: header}"></header>
+    <div class="main">
+        <div id="side-menu" th:replace="~{layout/sideMenu :: side-menu}">></div>
+        <div class="contents" th:insert="${contents}">></div>
+    </div>
+</body>
+</html>

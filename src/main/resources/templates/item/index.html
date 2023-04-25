@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::link}, ~{::body/content()})}">
+<head>
+    <meta charset="UTF-8">
+    <!-- HTMLごとに利用ページの項目を入れておきましょう -->
+    <title>商品一覧表示</title>
+    <!-- index.html用のCSSファイルを読み込んでおく -->
+    <link rel="stylesheet" href="/css/item/index.css">
+</head>
+<body>
+    <h1>商品一覧表示ページ</h1>
+    <!-- class属性にtblを追加 -->
+    <table class="tbl">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>商品名</th>
+                <th>価格</th>
+                <th>在庫数</th>
+                <th>カテゴリ</th>
+                <!-- class属性にtbl-stockを追加 -->
+                <th class="tbl-stock"></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.price}"></td>
+                <td th:text="${item.stock}"></td>
+                <td th:text="${item.category.name}"></td>
+                <td>
+                    <form th:action="@{/item/stock/{id}(id=${item.id})}" method="post">
+                        <!-- class属性にtbl-formを追加 -->
+                        <input class="tbl-form" type="number" name="stock">
+                        <!-- class属性にtbl-stock-btnを追加 -->
+                        <input class="tbl-stock-btn" type="submit" name="in" value="入荷">
+                        <!-- class属性にtbl-stock-btnを追加 -->
+                        <input class="tbl-stock-btn" type="submit" name="out" value="出荷">
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/item/henshu/{id}(id=${item.id})}" method="get">
+                        <!-- class属性にtbl-btnを追加 -->
+                        <input class="tbl-btn" type="submit" value="編集">
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/item/sakujo/{id}(id=${item.id})}" method="post">
+                        <!-- class属性にtbl-btnを追加 -->
+                        <input class="tbl-btn" type="submit" value="削除">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
